@@ -1,0 +1,19 @@
+{
+  "name": "item-sets",
+  "version": "0.1.0",
+  "description": "League item set creator",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WereGoingOcean/item-sets.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WereGoingOcean/item-sets/issues"
+  },
+  "homepage": "https://github.com/WereGoingOcean/item-sets#readme"
+}
