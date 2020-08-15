@@ -4,6 +4,7 @@
   "description": "League item set creator",
   "main": "main.js",
   "scripts": {
+    "app": "electron src/main.js",
     "test": "test"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/WereGoingOcean/item-sets/issues"
   },
-  "homepage": "https://github.com/WereGoingOcean/item-sets#readme"
+  "homepage": "https://github.com/WereGoingOcean/item-sets#readme",
+  "devDependencies": {
+    "electron": "^9.2.0"
+  }
 }
