@@ -1,22 +1,32 @@
 <template>
   <div>
-    <h1>My Event</h1>
-    <p>Capacity: {{ capacity }}</p>
-    <button @click="increaseCapacity()">Increase Capacity</button>
+    <h1>League Item Sets</h1>
+    <select v-model="state.provider">
+      <option value="ugg">U.gg</option>
+    </select>
+    <p>Selected provider is {{ state.provider }}</p>
+    <button @click="generateSets">Generate</button>
   </div>
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
+import { reactive } from "vue";
+import { ipcRenderer } from "electron";
 
 export default {
   setup() {
-    const capacity = ref(3);
+    const state = reactive({
+      provider: ''
+    });
 
-    function increaseCapacity() {
-      capacity.value++;
+    function generateSets() {
+      console.log('GEN!');
+      ipcRenderer.send('generateSets', {
+        provider: this.state.provider
+      });
     }
-    return { capacity, increaseCapacity };
+
+    return {state, generateSets};
   },
 };
 </script>

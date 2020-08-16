@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
 
@@ -60,3 +60,9 @@ app.on('activate', () => {
 app.on('ready', () => {
   mainWindow = createMainWindow()
 })
+
+ipcMain.on('generateSets', (event, args) => {
+  console.log('Gen sets called!');
+  console.log(event);
+  console.log(args);
+});
