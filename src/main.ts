@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+import { app, BrowserWindow } from "electron";
 
 function createWindow() {
   // Create a browser window
@@ -14,14 +14,8 @@ function createWindow() {
   win.loadFile("index.html");
 }
 
-app
-  .whenReady()
-  .then(() => {
-    console.log("App ready");
+app.whenReady().then(() => {
+  console.log("App ready");
 
-    createWindow();
-  })
-  .catch((err) => {
-    console.log(`Error creating window ${err}`);
-    app.quit();
-  });
+  createWindow();
+});
