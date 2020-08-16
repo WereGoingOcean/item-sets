@@ -2,7 +2,10 @@
   "name": "item-sets",
   "version": "0.1.0",
   "description": "League item set creator",
-  "scripts": {},
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WereGoingOcean/item-sets.git"
@@ -13,6 +16,8 @@
     "url": "https://github.com/WereGoingOcean/item-sets/issues"
   },
   "homepage": "https://github.com/WereGoingOcean/item-sets#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "electron": "^9.2.0"
+  },
   "dependencies": {}
 }
