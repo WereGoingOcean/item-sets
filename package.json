@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
-    "dist": "npm run compile && electron-builder"
+    "dist": "npm run compile && electron-builder",
+    "postinstall": "@powershell copy RendererTarget.js  node_modules\\electron-webpack\\out\\targets\\RendererTarget.js"
   },
   "repository": {
     "type": "git",
