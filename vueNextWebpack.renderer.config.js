@@ -1,4 +1,5 @@
 const { VueLoaderPlugin } = require("vue-loader");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = function (config) {
   config.module.rules.push({
@@ -23,7 +24,16 @@ module.exports = function (config) {
   config.plugins.push(new VueLoaderPlugin());
 
   delete config.resolve.alias.vue$;
-  delete config.resolve.alias['vue-router$'];
+  delete config.resolve.alias["vue-router$"];
+
+  const forkTsPlguin = config.plugins.filter(
+    (p) => p instanceof ForkTsCheckerWebpackPlugin
+  )[0];
+
+  forkTsPlguin.vue = {
+    enabled: true,
+    compiler: "@vue/compiler-sfc",
+  };
 
   console.log(config);
 

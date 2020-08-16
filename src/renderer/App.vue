@@ -22,7 +22,7 @@ export default {
     function generateSets() {
       console.log('GEN!');
       ipcRenderer.send('generateSets', {
-        provider: this.state.provider
+        provider: state.provider
       });
     }
 

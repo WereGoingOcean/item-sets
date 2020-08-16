@@ -4,7 +4,7 @@
   "description": "League item set creator",
   "main": "main.js",
   "scripts": {
-    "dev": "electron-webpack dev",
+    "dev": "node ./devrunner.js",
     "compile": "electron-webpack",
     "dist": "npm run compile && electron-builder",
     "postinstall": "@powershell copy RendererTarget.js  node_modules\\electron-webpack\\out\\targets\\RendererTarget.js"
@@ -29,8 +29,10 @@
     "electron-builder": "^22.8.0",
     "electron-webpack": "^2.8.2",
     "electron-webpack-ts": "^4.0.1",
+    "execa": "^4.0.3",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3",
+    "tree-kill": "^1.2.2",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
     "vue-loader": "^16.0.0-beta.5",
