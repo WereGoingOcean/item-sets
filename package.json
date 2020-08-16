@@ -2,13 +2,7 @@
   "name": "item-sets",
   "version": "0.1.0",
   "description": "League item set creator",
-  "main": "main.js",
-  "scripts": {
-    "dev": "node ./devrunner.js",
-    "compile": "electron-webpack",
-    "dist": "npm run compile && electron-builder",
-    "postinstall": "@powershell copy RendererTarget.js  node_modules\\electron-webpack\\out\\targets\\RendererTarget.js"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WereGoingOcean/item-sets.git"
@@ -19,33 +13,6 @@
     "url": "https://github.com/WereGoingOcean/item-sets/issues"
   },
   "homepage": "https://github.com/WereGoingOcean/item-sets#readme",
-  "devDependencies": {
-    "@babel/core": "^7.11.1",
-    "@vue/compiler-sfc": "^3.0.0-rc.5",
-    "babel-loader": "^8.1.0",
-    "cross-env": "^7.0.2",
-    "css-loader": "^4.2.1",
-    "electron": "^9.2.0",
-    "electron-builder": "^22.8.0",
-    "electron-webpack": "^2.8.2",
-    "electron-webpack-ts": "^4.0.1",
-    "execa": "^4.0.3",
-    "node-sass": "^4.14.1",
-    "sass-loader": "^9.0.3",
-    "tree-kill": "^1.2.2",
-    "ts-loader": "^8.0.2",
-    "typescript": "^3.9.7",
-    "vue-loader": "^16.0.0-beta.5",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
-  },
-  "dependencies": {
-    "vue": "^3.0.0-rc.5"
-  },
-  "electronWebpack": {
-    "renderer": {
-      "webpackConfig": "vueNextWebpack.renderer.config.js"
-    }
-  }
+  "devDependencies": {},
+  "dependencies": {}
 }
