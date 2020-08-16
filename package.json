@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
-    "dist": "npm run compile && electron-builder",
-    "app": "electron src/electron.js",
-    "test": "test",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "dist": "npm run compile && electron-builder"
   },
   "repository": {
     "type": "git",
