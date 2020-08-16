@@ -4,6 +4,9 @@
   "description": "League item set creator",
   "main": "main.js",
   "scripts": {
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "npm run compile && electron-builder",
     "app": "electron src/electron.js",
     "test": "test",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
@@ -25,6 +28,10 @@
     "cross-env": "^7.0.2",
     "css-loader": "^4.2.1",
     "electron": "^9.2.0",
+    "electron-builder": "^22.8.0",
+    "electron-webpack": "^2.8.2",
+    "electron-webpack-ts": "^4.0.1",
+    "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
@@ -35,5 +42,10 @@
   },
   "dependencies": {
     "vue": "^3.0.0-rc.5"
+  },
+  "electronWebpack": {
+    "renderer": {
+      "webpackConfig": "vueNextWebpack.renderer.config.js"
+    }
   }
 }
