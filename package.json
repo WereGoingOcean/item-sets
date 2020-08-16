@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build && electron .",
     "build": "tsc",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "clean": "rimraf node_modules"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/WereGoingOcean/item-sets#readme",
   "devDependencies": {
     "electron": "^9.2.0",
+    "rimraf": "^3.0.2",
     "typescript": "^3.9.7"
   },
   "dependencies": {}
