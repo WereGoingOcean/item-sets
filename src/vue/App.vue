@@ -1,20 +1,40 @@
 <template>
-  <h1>A vue app</h1>
-  <button @click="increase">Clicked {{ count }} times.</button>
+  <div>
+    <label>Select Provider: </label>
+    <select v-model="selectedProvider">
+      <option value="u-gg">U.gg</option>
+    </select>
+    <p>
+      {{ selectedProvider }}
+    </p>
+  </div>
+  <div>
+    <button @click="generate">Generate</button>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+
+// Import won't work for this
+const ipcRenderer = window.require("electron").ipcRenderer;
+
+import GenerationOptions from "../electron/generation-options";
+
 export default defineComponent({
   setup() {
-    const count = ref(0);
-    const increase = () => {
-      count.value++;
+    const selectedProvider = ref("");
+
+    const generate = () => {
+      ipcRenderer.send(
+        "generate-item-sets",
+        new GenerationOptions([selectedProvider.value])
+      );
     };
 
     return {
-      count,
-      increase,
+      selectedProvider,
+      generate,
     };
   },
 });

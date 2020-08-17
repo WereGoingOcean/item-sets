@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
+import ItemSetGenerator from "./electron/item-set-generator";
 
 function createWindow() {
   // Create a browser window
@@ -18,4 +19,8 @@ app.whenReady().then(() => {
   console.log("App ready");
 
   createWindow();
+});
+
+ipcMain.on("generate-item-sets", (_, args) => {
+  ItemSetGenerator.generateItemSets(args);
 });
