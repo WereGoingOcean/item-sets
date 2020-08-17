@@ -9,7 +9,8 @@
     "build-electron": "tsc ./src/main.ts --outDir ./dist",
     "build-vue": "webpack",
     "clean": "rimraf dist",
-    "clean-node": "rimraf node_modules"
+    "clean-node": "rimraf node_modules",
+    "test": "tsc ./src/test.ts --outDir ./test && node ./test/test.js"
   },
   "repository": {
     "type": "git",
