@@ -1,6 +1,7 @@
 import { ILeaguePathProvider } from './league-path-provider';
 import { ItemSets } from '../models/league/item-set';
 import { promises } from 'fs';
+import LeaguePatchProvider from './league-patch-provider';
 
 export default class ItemSetExporter {
 	readonly pathProvider: ILeaguePathProvider;
@@ -9,7 +10,7 @@ export default class ItemSetExporter {
 		this.pathProvider = pathProvider;
 	}
 
-	public export_item_sets(itemSets: ItemSets) {
+	public export_item_sets(itemSets: ItemSets, leaguePatch: string) {
 		const basePath = this.pathProvider.getLeaguePath();
 
 		itemSets.itemSets.forEach(async (sets, champ) => {
@@ -21,8 +22,22 @@ export default class ItemSetExporter {
 				recursive: true,
 			});
 
+			// Clear any old files from our app
+			const regex = /LIS.*\.json$/;
+
+			const existingFiles = await promises.readdir(championPath);
+
+			await Promise.all(
+				existingFiles
+					.filter((f) => regex.test(f))
+					.map(
+						async (file) =>
+							await promises.unlink(`${championPath}\\${file}`)
+					)
+			);
+
 			sets.forEach(async (set) => {
-				const fileName = `${championPath}\\LIS-PATCH_NUM-${set.title}.json`;
+				const fileName = `${championPath}\\LIS-${set.title}.json`;
 				try {
 					await promises.writeFile(
 						fileName,

@@ -14,6 +14,8 @@ export default class UggSourceJsonProvider implements ISourceJsonProvider {
 	private readonly platPlusKey = '10';
 
 	private getUggChampionUrl(leagueVersion: string, championId: string) {
+		leagueVersion = leagueVersion.replace('.', '_');
+
 		return `https://stats2.u.gg/lol/${this.UGGApiVersion}/overview/${leagueVersion}/ranked_solo_5x5/${championId}/${this.UGGOverviewVersion}.json`;
 	}
 
