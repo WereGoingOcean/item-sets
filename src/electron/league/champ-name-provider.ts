@@ -9,6 +9,14 @@ export default class ChampNameProvider {
 		return this.champNameMap.get(id);
 	}
 
+	public static async getAllChampIds() : Promise<Array<string>> {
+		if (this.champNameMap == null) {
+			await this.loadChampNameMap();
+		}
+
+		return Array.from(this.champNameMap.keys());
+	}
+
 	private static async loadChampNameMap() {
 		this.champNameMap = new Map<string, string>();
 

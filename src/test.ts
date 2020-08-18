@@ -5,24 +5,34 @@ import { ItemSet, ItemSets } from './electron/models/league/item-set';
 import ItemSetExporter from './electron/league/item-set-exporter';
 import { HardCodedPathProvider } from './electron/league/league-path-provider';
 import LeaguePatchProvider from './electron/league/league-patch-provider';
+import ChampNameProvider from './electron/league/champ-name-provider';
 
 var provider = new UGGSourceJsonProvider();
 
 var creator = new UggItemSetCreator();
 
 LeaguePatchProvider.getNaPatchVersion().then((leagueVersion) => {
-	provider
-		.getSourceJson(new SourceJsonRequest(leagueVersion, '1'))
-		.then(async (annieData) => {
-			const itemSets = await creator.createItemSet(
-				annieData,
-				'1',
-				leagueVersion
-			);
+	ChampNameProvider.getAllChampIds().then((ids) => {
+		const map = new Map<string, ItemSet[]>();
 
-			const map = new Map<string, ItemSet[]>();
+		Promise.all(
+			ids.map(async (id) => {
+				var champData = await provider.getSourceJson(
+					new SourceJsonRequest(leagueVersion, id)
+				);
+				const itemSets = await creator.createItemSet(
+					champData,
+					id,
+					leagueVersion
+				);
 
-			map.set('Annie', itemSets);
+				map.set(
+					await ChampNameProvider.getNameForChampId(id),
+					itemSets
+				);
+			})
+		).then(() => {
+			console.log(map);
 
 			const setExporter = new ItemSetExporter(
 				new HardCodedPathProvider()
@@ -30,4 +40,5 @@ LeaguePatchProvider.getNaPatchVersion().then((leagueVersion) => {
 
 			setExporter.export_item_sets(new ItemSets(map), leagueVersion);
 		});
+	});
 });
