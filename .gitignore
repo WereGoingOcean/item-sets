@@ -105,3 +105,6 @@ dist
 
 # Test output stuff
 test/
+
+# Generated app files
+build-output/

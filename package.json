@@ -1,39 +1,49 @@
 {
-  "name": "item-sets",
-  "version": "0.1.0",
-  "description": "League item set creator",
-  "main": "./dist/main.js",
-  "scripts": {
-    "start": "npm run build-electron && npm run build-vue && electron .",
-    "build": "npm run build-electron && npm run build-vue",
-    "build-electron": "tsc ./src/main.ts --outDir ./dist",
-    "build-vue": "webpack",
-    "clean": "rimraf dist",
-    "clean-node": "rimraf node_modules",
-    "test": "tsc ./src/test.ts --outDir ./test && node ./test/test.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WereGoingOcean/item-sets.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/WereGoingOcean/item-sets/issues"
-  },
-  "homepage": "https://github.com/WereGoingOcean/item-sets#readme",
-  "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.0-rc.5",
-    "electron": "^9.2.0",
-    "rimraf": "^3.0.2",
-    "ts-loader": "^8.0.2",
-    "typescript": "^3.9.7",
-    "vue-loader": "^16.0.0-beta.5",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
-  },
-  "dependencies": {
-    "axios": "^0.19.2",
-    "vue": "^3.0.0-rc.5"
-  }
+	"name": "item-sets",
+	"version": "0.1.0",
+	"description": "League item set creator",
+	"main": "./dist/main.js",
+	"scripts": {
+		"start": "npm run build-electron && npm run build-vue && electron .",
+		"build": "npm run build-electron && npm run build-vue",
+		"build-electron": "tsc ./src/main.ts --outDir ./dist",
+		"build-vue": "webpack",
+		"clean": "rimraf dist",
+		"clean-node": "rimraf node_modules",
+		"test": "tsc ./src/test.ts --outDir ./test && node ./test/test.js",
+		"pack": "electron-builder --dir",
+		"dist": "electron-builder"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/WereGoingOcean/item-sets.git"
+	},
+	"author": "Dylan O'Gara",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/WereGoingOcean/item-sets/issues"
+	},
+	"homepage": "https://github.com/WereGoingOcean/item-sets#readme",
+	"devDependencies": {
+		"@vue/compiler-sfc": "^3.0.0-rc.5",
+		"electron": "^9.2.0",
+		"electron-builder": "^22.8.0",
+		"rimraf": "^3.0.2",
+		"ts-loader": "^8.0.2",
+		"typescript": "^3.9.7",
+		"vue-loader": "^16.0.0-beta.5",
+		"webpack": "^4.44.1",
+		"webpack-cli": "^3.3.12"
+	},
+	"dependencies": {
+		"axios": "^0.19.2",
+		"vue": "^3.0.0-rc.5"
+	},
+	"build": {
+		"appId": "item.sets.creator.app",
+		"productName": "League Item Set Generator",
+		"directories": {
+			"output": "build-output"
+		}
+	}
 }
