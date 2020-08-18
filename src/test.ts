@@ -1,24 +1,24 @@
-import { ItemBlock, Item, ItemSet, ItemSets } from "./electron/models/league/item-set";
-import ItemSetExporter from "./electron/league/item-set-exporter";
-import { HardCodedPathProvider } from "./electron/league/league-path-provider";
+import UGGSourceJsonProvider from './electron/sources/u-gg/u-gg-source-json-provider';
+import { SourceJsonRequest } from './electron/sources/interfaces/source-json-provider';
+import UggItemSetCreator from './electron/sources/u-gg/u-gg-item-set-creator';
+import { ItemSet, ItemSets } from './electron/models/league/item-set';
+import ItemSetExporter from './electron/league/item-set-exporter';
+import { HardCodedPathProvider } from './electron/league/league-path-provider';
 
-// Quick script for testing new stuff
-const twoHealthPotions = new Item('2003', 2);
+var provider = new UGGSourceJsonProvider();
 
-const bootsOfSpeed = new Item('1001', 1);
+var creator = new UggItemSetCreator();
 
-const ludens = new Item('3285', 1);
+provider
+	.getSourceJson(new SourceJsonRequest('10_16', '1'))
+	.then((annieData) => {
+		const itemSets = creator.createItemSet(annieData);
 
-const startingItemBlock = new ItemBlock('Starting Items', [bootsOfSpeed, twoHealthPotions]);
+		const map = new Map<string, ItemSet[]>();
 
-const coreItemBlock = new ItemBlock('Core', [ludens]);
+		map.set('Annie', itemSets);
 
-const itemSet = new ItemSet('TestingSet', [startingItemBlock, coreItemBlock]);
+		const setExporter = new ItemSetExporter(new HardCodedPathProvider());
 
-const map = new Map<string, ItemSet[]>();
-
-map.set('Ahri', [itemSet]);
-
-const setExporter = new ItemSetExporter(new HardCodedPathProvider());
-
-setExporter.export_item_sets(new ItemSets(map));
+		setExporter.export_item_sets(new ItemSets(map));
+	});
