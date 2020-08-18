@@ -32,18 +32,24 @@ export default class UggItemSetCreator implements IItemSetCreator {
 
 		const validRoleSets = validRoles.map(async (role) => {
 			const data = sourceJson[role][0];
+			//Skill order is index 4
+			// Has an array of games played, games won, full skill order, simple skill order
+			const fullSkillOrder : Array<string> = data[4][2];
+			const overviewSkillOrder : string = data[4][3];
+
 			// Starting items is index 2
 			// Has an array of games played, games won, item code array
 			const startingItemBlock = this.generateItemBlock(
 				data[2][2],
-				'Starting Items'
+				`Starting Items (First Skills) ${fullSkillOrder[0]}->${fullSkillOrder[1]}->${fullSkillOrder[2]}`
 			);
 
 			//Core items is index 3
-			//Same format as above
+			//Same format as above			
+
 			const coreItemBlock = this.generateItemBlock(
 				data[3][2],
-				'Core Items'
+				`Core Items (Skill Order) ${overviewSkillOrder.split('').join('->')}`
 			);
 
 			//Rest of items live under index 5
