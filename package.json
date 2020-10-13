@@ -1,6 +1,6 @@
 {
 	"name": "item-sets",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "League item set creator",
 	"main": "./dist/main.js",
 	"scripts": {
@@ -44,6 +44,9 @@
 		"productName": "League Item Set Generator",
 		"directories": {
 			"output": "build-output"
-		}
+		},
+		"extraFiles": [
+			"./static-data"
+		]
 	}
 }
