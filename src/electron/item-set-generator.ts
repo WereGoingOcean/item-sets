@@ -9,7 +9,7 @@ import UggSourceJsonProvider from './sources/u-gg/u-gg-source-json-provider';
 import UggItemSetCreator from './sources/u-gg/u-gg-item-set-creator';
 import LeaguePatchProvider from './league/league-patch-provider';
 import ChampNameProvider from './league/champ-name-provider';
-import { ItemSet, ItemSets } from './models/league/item-set';
+import { ItemSet, ItemSets, Item } from './models/league/item-set';
 import ItemSetExporter from './league/item-set-exporter';
 import { HardCodedPathProvider } from './league/league-path-provider';
 
@@ -40,11 +40,30 @@ export default class ItemSetGenerator {
 				var champData = await provider.getSourceJson(
 					new SourceJsonRequest(leagueVersion, id)
 				);
+
 				const itemSets = await creator.createItemSet(
 					champData,
 					id,
 					leagueVersion
 				);
+
+				// TODO eventually add an interface for this?
+				itemSets.forEach(set => {
+					set.blocks.forEach(block => {
+						block.items = block.items.reduce((sanitizedItems, nextItem) => {
+							const existingItem = sanitizedItems.find(item => item.id == nextItem.id);
+
+							if (existingItem) {
+								existingItem.count++;
+							} else {
+								sanitizedItems.push(nextItem);
+							}
+
+							return sanitizedItems;
+
+						}, new Array<Item>());
+					})
+				})
 
 				map.set(
 					await ChampNameProvider.getNameForChampId(id),
@@ -52,6 +71,7 @@ export default class ItemSetGenerator {
 				);
 			})
 		);
+
 		const setExporter = new ItemSetExporter(new HardCodedPathProvider());
 
 		setExporter.export_item_sets(new ItemSets(map), leagueVersion);

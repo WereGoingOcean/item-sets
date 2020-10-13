@@ -2,7 +2,7 @@ export class Item {
 	// League Item ID code
 	readonly id: string;
 
-	readonly count: number;
+	count: number;
 
 	constructor(id: string, count: number = 1) {
 		this.id = id;
@@ -14,7 +14,7 @@ export class ItemBlock {
 	// Key is type for some reason but it's really the block name
 	readonly type: string;
 
-	readonly items: Item[];
+	items: Item[];
 
 	constructor(type: string, items: Item[]) {
 		this.type = type;
